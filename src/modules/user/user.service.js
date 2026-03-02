@@ -2,6 +2,8 @@ import collections from "../../config/collections.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import config from "../../config/index.js";
+
+// create user
 const createUser = async(userData) => {
     const email = userData.email;
     const password = userData.password;
@@ -33,6 +35,7 @@ const createUser = async(userData) => {
     }
 };
 
+// user login
 const loginUser = async(loginData) => {
     const {email, password} = loginData;
     try{
@@ -72,9 +75,23 @@ const error = new Error("User not found!");
     }catch(err){
         throw err;
     }
+};
+
+// get all user 
+const getAllUser = async() => {
+    try{
+        const users = await collections.usersCollection.find({}).project({password: 0}).toArray();
+        return users;
+    }catch(err){
+        throw new Error( err.message);
+    }
 }
+
+
+
 
 export const userServices = {
     createUser,
     loginUser,
+    getAllUser,
 }
