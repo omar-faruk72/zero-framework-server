@@ -16,11 +16,6 @@ app.get('/', (req, res) => {
     res.send('Zero Framework Server is Running with ESM!');
 });
 
-// user
-// app.use('/users', )
-
-// data post
-
 app.use('/post', dataPostRoutes)
 
 
