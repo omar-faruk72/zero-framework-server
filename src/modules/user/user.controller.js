@@ -15,6 +15,23 @@ const createUser = async(req, res) => {
     }
 };
 
+const loginUser = async(req, res) => {
+    try{
+        const result = await userServices.loginUser(req.body);
+        res.status(200).json({
+            status: true,
+            message: "Login successful",
+            data: result
+        });
+    }catch(err){
+        res.status(err.statusCode || 500).json({
+            status: false,
+            message: err.message
+            });
+    }
+}
+
 export const userControllers = {
     createUser,
+    loginUser,
 }

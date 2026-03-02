@@ -60,4 +60,5 @@ const error = new Error("User not found!");
 
 export const userServices = {
     createUser,
+    loginUser,
 }
