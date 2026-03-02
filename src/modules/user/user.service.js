@@ -31,6 +31,33 @@ const createUser = async(userData) => {
     }
 };
 
+const loginUser = async(loginData) => {
+    const {email, password} = loginData;
+    try{
+        const user = await collections.usersCollection.findOne({email});
+// email not valid
+        if(!user){
+const error = new Error("User not found!");
+            error.statusCode = 404;
+            throw error;      
+          }
+
+        //   password chake 
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        // hasd password not valid
+        if(!isPasswordMatch){
+            const error = new Error("Invalid password!");
+            error.statusCode = 401; 
+            throw error;
+        }
+        const { password: _, ...userWithoutPassword } = user;
+        return userWithoutPassword;
+
+    }catch(err){
+        throw err;
+    }
+}
+
 export const userServices = {
     createUser,
 }

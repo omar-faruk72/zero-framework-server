@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 // user
-app.use('/register', userRouter);
+app.use('/', userRouter);
 
 app.use('/post', dataPostRoutes)
 
