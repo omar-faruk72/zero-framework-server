@@ -1,14 +1,14 @@
-import { userServices } from "./user.service"
+import { userServices } from "./user.service.js"
 
 const createUser = async(req, res) => {
     try{
         const result = await userServices.createUser(req.body);
-        res.statuse(201).json({
+        res.status(201).json({
             status: true,
             data: result
         });
     }catch(err){
-        res.statuse(err.statuseCode || 500).json({
+        res.status(err.statusCode || 500).json({
             status: false,
             message: err.message
         })

@@ -1,4 +1,4 @@
-import collections from "../../config/collections"
+import collections from "../../config/collections.js"
 
 const createUser = async(userData) => {
     const email = userData.email;
