@@ -1,5 +1,7 @@
 import collections from "../../config/collections.js";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import config from "../../config/index.js";
 const createUser = async(userData) => {
     const email = userData.email;
     const password = userData.password;
@@ -49,9 +51,23 @@ const error = new Error("User not found!");
             const error = new Error("Invalid password!");
             error.statusCode = 401; 
             throw error;
-        }
+        };
+
+        // jwt cretated
+        const payload = {
+            id: user._id,
+            email: user.email,
+            role: user.role
+        };
+        // token janaret
+        const token = jwt.sign(
+            payload,
+            config.jwt_secret,
+            {expiresIn: config.jwt_expires_in}
+        );
+
         const { password: _, ...userWithoutPassword } = user;
-        return userWithoutPassword;
+        return {user: userWithoutPassword, token};
 
     }catch(err){
         throw err;
