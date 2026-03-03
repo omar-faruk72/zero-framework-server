@@ -3,6 +3,7 @@ import cors from 'cors';
 import config from './config/index.js';
 import { connectDB } from './config/db.js';
 import { userRouter } from './modules/user/user.routes.js';
+import { serviceRouters } from './modules/service/service.routes.js';
 
 const app = express();
 const port = config.port;
@@ -19,7 +20,8 @@ app.get('/', (req, res) => {
 // user
 app.use('/', userRouter);
 
-
+// service
+app.use('/', serviceRouters);
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

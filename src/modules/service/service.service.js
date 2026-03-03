@@ -1,4 +1,4 @@
-import collections from "../../collections.js";
+import collections from "../../config/collections.js";
 
 const createService = async (serviceData) => {
     try {
