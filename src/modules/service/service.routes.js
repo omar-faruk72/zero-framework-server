@@ -5,4 +5,5 @@ const router = Router();
 
 router.post("/add-services", serviceControllers.createService);
 
+router.get("/all-services", serviceControllers.getAllServices);
 export const serviceRouters = router;
