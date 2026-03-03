@@ -35,7 +35,34 @@ const getAllServices = async (req, res) => {
     }
 };
 
+// get single services api 
+const getSingleService = async (req, res) => {
+    try {
+        const { id } = req.params; 
+        const result = await serviceServices.getSingleServices(id);
+
+        if (!result) {
+            return res.status(404).json({
+                status: false,
+                message: "Service not found!"
+            });
+        }
+
+        res.status(200).json({
+            status: true,
+            message: "Service fetched successfully!",
+            data: result
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: false,
+            message: err.message
+        });
+    }
+};
+
 export const serviceControllers = {
     createService,
-    getAllServices
+    getAllServices,
+    getSingleService,
 };
