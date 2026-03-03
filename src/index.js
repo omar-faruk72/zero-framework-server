@@ -10,7 +10,10 @@ const port = config.port;
 
 connectDB();
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['http://127.0.0.1:5500', 'http://localhost:5500'],
+    credentials: true
+}));
 app.use(express.json());
 
 app.get('/', (req, res) => {
