@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import config from './config/index.js';
 import { connectDB } from './config/db.js';
-import { dataPostRoutes } from './modules/data-post/data-post.routes.js';
 import { userRouter } from './modules/user/user.routes.js';
 
 const app = express();
@@ -19,8 +18,6 @@ app.get('/', (req, res) => {
 
 // user
 app.use('/', userRouter);
-
-app.use('/post', dataPostRoutes)
 
 
 

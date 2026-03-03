@@ -4,10 +4,9 @@ const collections = {
     get usersCollection() {
         return getDB().collection('users');
     },
-
-    get dataPostCollection() {
-        return getDB().collection('data_post');
-    },
+    get serviceCollection() {
+        return getDB().collection('services');
+    }
 };
 
 export default collections;
