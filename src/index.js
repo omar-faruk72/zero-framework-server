@@ -11,7 +11,11 @@ const port = config.port;
 connectDB();
 // Middleware
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', 'http://localhost:5500'],
+  origin: [
+        'http://127.0.0.1:5500', 
+        'http://localhost:5500', 
+        'https://zero-framework.vercel.app' 
+    ],
     credentials: true
 }));
 app.use(express.json());
