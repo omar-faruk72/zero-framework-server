@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import collections from "../../config/collections.js";
 // service post api
 const createService = async (serviceData) => {
@@ -23,7 +24,19 @@ const getAllServices = async () => {
     }
 };
 
+// get single service 
+const getSingleServices = async (id) => {
+    try {
+        const query = { _id: new ObjectId(id) };
+        const result = await collections.serviceCollection.findOne(query);
+        return result;
+    } catch (error) {
+        throw new Error("Invalid ID format or Service not found!");
+    }
+};
+
 export const serviceServices = {
     createService,
     getAllServices,
+    getSingleServices,
 };
