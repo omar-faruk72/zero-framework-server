@@ -15,10 +15,23 @@ const createService = async (serviceData) => {
 };
 
 // all service get api
-const getAllServices = async () => {
+const getAllServices = async (page = 1, limit = 4) => {
     try {
-        const result = await collections.serviceCollection.find({}).toArray();
-        return result;
+        const skip = (page - 1) * limit;
+                const result = await collections.serviceCollection
+            .find({})
+            .skip(skip)
+            .limit(limit)
+            .toArray();
+        const totalServices = await collections.serviceCollection.countDocuments();
+        const totalPages = Math.ceil(totalServices / limit);
+
+        return {
+            services: result,
+            totalPages,
+            currentPage: page,
+            totalServices
+        };
     } catch (error) {
         throw new Error("Failed to fetch services: " + error.message);
     }

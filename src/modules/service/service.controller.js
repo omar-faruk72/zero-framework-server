@@ -20,12 +20,15 @@ const createService = async (req, res) => {
 // get all service api
 const getAllServices = async (req, res) => {
     try {
-        const result = await serviceServices.getAllServices();
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 4;
+
+        const result = await serviceServices.getAllServices(page, limit);
 
         res.status(200).json({
             status: true,
             message: "Services fetched successfully!",
-            data: result
+            data: result 
         });
     } catch (err) {
         res.status(500).json({
