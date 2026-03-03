@@ -1,5 +1,5 @@
 import collections from "../../config/collections.js";
-
+// service post api
 const createService = async (serviceData) => {
     try {
         const result = await collections.serviceCollection.insertOne({
@@ -13,6 +13,17 @@ const createService = async (serviceData) => {
     }
 };
 
+// all service get api
+const getAllServices = async () => {
+    try {
+        const result = await collections.serviceCollection.find({}).toArray();
+        return result;
+    } catch (error) {
+        throw new Error("Failed to fetch services: " + error.message);
+    }
+};
+
 export const serviceServices = {
-    createService
+    createService,
+    getAllServices,
 };
